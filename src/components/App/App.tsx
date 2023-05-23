@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import "@components/App/App.sass";
 import { Container } from "@mui/material";
-import SelectionStepper from "@components/Coffee/SelectionStepper";
+import SelectionStepper from "@components/OptionSelection/SelectionStepper";
 
 const App: FC = () => {
   return (

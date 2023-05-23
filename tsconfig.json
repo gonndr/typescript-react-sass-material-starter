@@ -19,7 +19,7 @@
       "@state/*": ["src/state/*"],
       "@utils/*": ["src/utils/*"]
     },
-    "types": ["node"]
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src", "custom.d.ts"]
 }
