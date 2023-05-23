@@ -18,14 +18,26 @@ const config = {
     filename: "[name].js",
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", "..."],
     alias: resolveTsAliases(__dirname + "/tsconfig.json"),
   },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: "babel-loader",
+        test: /\.(ts(x?))$/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: { presets: [["@babel/preset-env", { targets: "ie 11" }]] },
+          },
+          {
+            loader: "ts-loader",
+            options: {
+              onlyCompileBundledFiles: true,
+              compilerOptions: { noEmit: false },
+            },
+          },
+        ],
         exclude: /node_modules/,
       },
       {

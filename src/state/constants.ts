@@ -1,0 +1,4 @@
+export const SELECT_OPTION = "SELECT_PTION";
+export const GO_TO_PREVIOUS_STEP = "GO_TO_PREVIOUS_STEP";
+export const GO_TO_NEXT_STEP = "GO_TO_NEXT_STEP";
+export const GO_TO_FIRST_STEP = "GO_TO_FIRST_STEP";

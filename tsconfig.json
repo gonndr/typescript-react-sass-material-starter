@@ -15,7 +15,9 @@
       "@env/*": ["environments/*"],
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@state/*": ["src/state/*"],
+      "@utils/*": ["src/utils/*"]
     },
     "types": ["node"]
   },
