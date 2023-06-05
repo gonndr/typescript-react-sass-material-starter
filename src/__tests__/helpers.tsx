@@ -71,7 +71,7 @@ export const defaultLoadPage = ({
   mockAxiosRequest({
     url: getDataUrl,
     status,
-    responseData: { data: allOptions },
+    responseData: allOptions,
   });
   const router = createMemoryRouter(routesConfig, {
     initialEntries: ["/"],

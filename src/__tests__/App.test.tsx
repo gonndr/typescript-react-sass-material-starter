@@ -1,4 +1,4 @@
-import { screen, waitFor } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { defaultLoadPage } from "./helpers";
 import axios from "axios";
 
