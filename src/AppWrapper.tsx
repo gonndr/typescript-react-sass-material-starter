@@ -10,7 +10,7 @@ const AppWrapper: FC = () => {
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <CssBaseline />
-        <App />
+        <App />;
       </Provider>
     </ThemeProvider>
   );

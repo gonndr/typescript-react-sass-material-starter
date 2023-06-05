@@ -1,6 +1,8 @@
-export type AvailableOptionName = "Option 1" | "Option 2" | "Option 3";
-
-export type AvailableOption = {
-  name: AvailableOptionName;
-  description: string;
+export type AllData = OptionData[];
+export type OptionData = {
+  name: string;
+  data: string;
+};
+export type PostBody = {
+  data: string;
 };

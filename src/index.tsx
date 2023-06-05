@@ -6,13 +6,14 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import AppWrapper from "./AppWrapper";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
 const rootElement = document.getElementById("app");
 const root = ReactDOM.createRoot(rootElement!);
 
 root.render(
   <React.StrictMode>
-    <AppWrapper />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

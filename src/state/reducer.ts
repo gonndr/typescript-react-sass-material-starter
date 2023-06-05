@@ -1,45 +1,72 @@
 import { AnyAction } from "@reduxjs/toolkit";
-import { AvailableOptionName } from "@utils/types";
+import { AllData, OptionData } from "@utils/types";
 import {
-  GO_TO_FIRST_STEP,
-  GO_TO_NEXT_STEP,
-  GO_TO_PREVIOUS_STEP,
+  GET_REQUEST_FAIL,
+  GET_SUCCESS,
   SELECT_OPTION,
+  GET_REQUEST_PENDING,
+  POST_SUCCESS,
+  FIRE_NOTIFICATION,
 } from "./constants";
+import { NotificationBody } from "./types";
 
 export type RootState = {
-  activeStep: number;
-  selectedOptionName: AvailableOptionName | null;
+  selectedOption: string;
+  allData: AllData;
+  isLoading: boolean;
+  isError: boolean;
+  notification: NotificationBody;
 };
+
+const initialNotificationState = { message: "" };
 
 const initialState: RootState = {
-  activeStep: 0,
-  selectedOptionName: null,
+  selectedOption: "",
+  allData: [],
+  isLoading: false,
+  isError: false,
+  notification: initialNotificationState,
 };
 
-export default (state = initialState, { type, payload }: AnyAction) => {
+export default (
+  state = initialState,
+  { type, payload }: AnyAction
+): RootState => {
   switch (type) {
     case SELECT_OPTION:
       return {
-        ...initialState,
-        activeStep: 1,
-        selectedOptionName: payload,
+        ...state,
+        selectedOption: payload,
       };
-    case GO_TO_PREVIOUS_STEP:
-      return state.activeStep === 1
-        ? initialState
-        : {
-            ...state,
-            activeStep: state.activeStep - 1,
-            selectedOptionName: state.selectedOptionName,
-          };
-    case GO_TO_NEXT_STEP:
+    case FIRE_NOTIFICATION:
       return {
         ...state,
-        activeStep: state.activeStep + 1,
+        notification: payload,
       };
-    case GO_TO_FIRST_STEP:
-      return initialState;
+    case GET_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        allData: payload,
+      };
+    case GET_REQUEST_PENDING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_REQUEST_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    case POST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+      };
     default:
       return state;
   }

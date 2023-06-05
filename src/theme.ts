@@ -2,31 +2,16 @@ import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
 const theme = createTheme({
-  components: {
-    MuiStepContent: {
-      styleOverrides: {
-        root: {
-          borderColor: "#80411e",
-        },
-      },
-    },
-    MuiStepConnector: {
-      styleOverrides: {
-        line: {
-          borderColor: "#80411e",
-        },
-      },
-    },
-  },
   palette: {
     primary: {
-      main: "#37251b",
+      main: "#145aee",
+      contrastText: "#e2f2ff",
     },
     secondary: {
-      main: "#ad6d2f",
+      main: "#e2f2ff",
+      contrastText: "#e2f2ff",
     },
-    background: { paper: "#8f755f", default: "#d2c1b0" },
-    divider: "#80411e",
+    background: { paper: "#e2f2ff", default: "#FFFFFF" },
     error: {
       main: red.A400,
     },

@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import "@components/App/App.sass";
-import { Container } from "@mui/material";
-import SelectionStepper from "@components/OptionSelection/SelectionStepper";
+import ToastNotification from "@components/ToastNotification";
+import PermanentDrawer from "@components/PermanentDrawer/PermanentDrawer";
 
 const App: FC = () => {
   return (
-    <Container maxWidth="lg">
-      <h1 className="title">Hey there!</h1>
-      <SelectionStepper />
-    </Container>
+    <>
+      <ToastNotification />
+      <PermanentDrawer />
+    </>
   );
 };
 
