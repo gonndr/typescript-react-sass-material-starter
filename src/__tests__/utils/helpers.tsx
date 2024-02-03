@@ -4,7 +4,7 @@ import { act, render, screen } from "@testing-library/react";
 import axios from "axios";
 import Chance from "chance";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { routesConfig } from "../router";
+import { routesConfig } from "../../router";
 import {} from "@utils/helpers";
 import userEvent from "@testing-library/user-event";
 import { AllData } from "@utils/types";

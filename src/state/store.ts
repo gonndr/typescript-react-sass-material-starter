@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reducer from "./reducer";
-import apiMiddleware from "./middleware/apiMiddleware";
+import apiMiddleware from "./utils/apiMiddleware";
 
 const store = configureStore({
   reducer,

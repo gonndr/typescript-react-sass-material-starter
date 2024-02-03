@@ -7,14 +7,16 @@ import {
   getSuccess,
   postSuccess,
   fireNotification,
+  getRequest,
+  postRequest,
 } from "@state/actions";
 import { GetRequestPayload, PostRequestPayload } from "@state/types";
-import { GET_REQUEST, POST_REQUEST } from "@state/constants";
 
 const baseURL = "http://localhost:5000";
 const headers = {
   "Content-Type": "application/json",
 };
+const dataPath = "/data";
 
 const axiosRequest = <T>({
   method,
@@ -45,15 +47,15 @@ const apiMiddleware: Middleware =
         dispatch(getRequestPending());
 
         const { data } = type.startsWith("GET")
-          ? await axiosGetRequest(payload)
-          : await axiosPostRequest(payload);
+          ? await axiosGetRequest({ url: dataPath })
+          : await axiosPostRequest({ ...payload, url: dataPath });
 
         switch (type) {
-          case GET_REQUEST:
+          case getRequest.type:
           default:
             dispatch(getSuccess(data));
             break;
-          case POST_REQUEST:
+          case postRequest.type:
             dispatch(postSuccess());
             dispatch(
               fireNotification({

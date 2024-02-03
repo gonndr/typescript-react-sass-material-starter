@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { defaultLoadPage } from "./helpers";
+import { defaultLoadPage } from "./utils/helpers";
 import axios from "axios";
 
 const OK_STATUS = 200;
