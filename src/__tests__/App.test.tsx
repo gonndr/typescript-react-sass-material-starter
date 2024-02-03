@@ -1,9 +1,7 @@
 import { screen } from "@testing-library/react";
-import { defaultLoadPage } from "./utils/helpers";
 import axios from "axios";
-
-const OK_STATUS = 200;
-const ERROR_STATUS = 400;
+import { defaultLoadPage } from "./utils/defaultLoadPage";
+import { ERROR_STATUS, OK_STATUS } from "./utils/constants";
 
 const emptyDisplayText = "Select an option to view data";
 const errorDisplayText = "Something went wrong. Please try again";
