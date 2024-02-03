@@ -2,14 +2,13 @@ import React from "react";
 import MockAdapter from "axios-mock-adapter";
 import { act, render, screen } from "@testing-library/react";
 import axios from "axios";
-import Chance from "chance";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { routesConfig } from "../../router";
 import {} from "@utils/helpers";
 import userEvent from "@testing-library/user-event";
 import { AllData } from "@utils/types";
+import chance from "./chance.test";
 
-export const chance = new Chance();
 const mockedAxios = new MockAdapter(axios);
 const user = userEvent.setup({ pointerEventsCheck: 0 });
 export const userClick = async (element: HTMLElement) =>
