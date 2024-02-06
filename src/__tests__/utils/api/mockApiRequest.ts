@@ -1,22 +1,35 @@
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
-import { OK_STATUS } from "../constants";
+import axios, { AxiosPromise, AxiosRequestConfig } from "axios";
+import { mocked } from "jest-mock";
+import {
+  AxiosStatic,
+  InterceptionData,
+  MockApiRequest,
+  MockedCallData,
+} from "./types";
 
-const mockedAxios = new MockAdapter(axios);
+const mockedAxios = mocked<AxiosStatic>(axios); // or jest.mocked?
 
-const mockAxiosRequest = <T>({
-  url,
-  status = OK_STATUS,
-  responseData,
-  method = "GET",
+const getInterceptedResponse = ({
+  request,
+  interceptions,
 }: {
-  url: string;
-  status?: number;
-  responseData?: T;
-  method?: "GET" | "POST";
+  request: AxiosRequestConfig;
+  interceptions: InterceptionData[];
 }) =>
-  method === "GET"
-    ? mockedAxios.onGet(url).reply(status, responseData)
-    : mockedAxios.onPost(url).reply(status);
+  interceptions
+    .find(({ method, url }) => method === request.method && url === request.url)
+    ?.getResponse(request) as AxiosPromise;
+
+const mockAxiosRequest: MockApiRequest = ({ interceptions }) => {
+  mockedAxios.mockImplementation((request) =>
+    getInterceptedResponse({
+      interceptions,
+      request,
+    })
+  );
+  return {
+    getMockedApiCalls: (): MockedCallData[] => mockedAxios.mock.calls.flat(),
+  };
+};
 
 export const mockApiRequest = mockAxiosRequest;

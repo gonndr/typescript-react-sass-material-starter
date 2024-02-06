@@ -1,6 +1,7 @@
 {
   "scripts": {
     "check-types": "tsc",
+    "lint": "npx eslint --ignore-path .gitignore .",
     "start": "npm run serve:dev",
     "start:mock": "json-server --watch ./mockApi/mockData.json --port 5000",
     "build": "cross-env NODE_ENV=production webpack --color --progress",
@@ -45,7 +46,6 @@
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
     "@types/react-router-dom": "^5.3.3",
-    "axios-mock-adapter": "^1.21.4",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-module-resolver": "^5.0.0",

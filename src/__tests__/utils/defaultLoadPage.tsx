@@ -2,29 +2,24 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { routesConfig } from "../../router";
-import { AllData } from "@utils/types";
 import { mockApiRequest } from "./api/mockApiRequest";
-import { OK_STATUS } from "./constants";
-import { generateOptions } from "./helpers";
+import {
+  mockGetData,
+  MockGetDataConfig,
+} from "./api/interceptions/mockGetData";
 
-const baseURL = "http://localhost:5000";
-const getDataUrl = `${baseURL}/data`;
+jest.mock("axios");
 
 export const defaultLoadPage = ({
-  status = OK_STATUS,
-  allOptions = generateOptions(),
+  apiGetDataConfig = {},
 }: {
-  status?: number;
-  allOptions?: AllData;
+  apiGetDataConfig?: MockGetDataConfig;
 } = {}) => {
-  mockApiRequest({
-    url: getDataUrl,
-    status,
-    responseData: allOptions,
-  });
+  const interceptions = [mockGetData(apiGetDataConfig)];
+  const { getMockedApiCalls } = mockApiRequest({ interceptions });
   const router = createMemoryRouter(routesConfig, {
     initialEntries: ["/"],
   });
-
   render(<RouterProvider router={router} />);
+  return { getMockedApiCalls };
 };

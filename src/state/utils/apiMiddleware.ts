@@ -13,22 +13,17 @@ import {
 import { GetRequestPayload, PostRequestPayload } from "@state/types";
 
 const baseURL = "http://localhost:5000";
+const dataUrl = `${baseURL}/data`;
 const headers = {
   "Content-Type": "application/json",
 };
-const dataPath = "/data";
 
 const axiosRequest = <T>({
   method,
   url,
   data,
   headers,
-}: {
-  method: "GET" | "POST";
-  url: string;
-  data?: T;
-  headers?: AxiosRequestConfig["headers"];
-}) => axios.request({ baseURL, method, url, data, headers });
+}: AxiosRequestConfig<T>) => axios({ method, url, data, headers });
 
 const axiosGetRequest = ({ url }: GetRequestPayload) =>
   axiosRequest({ method: "GET", url });
@@ -47,8 +42,8 @@ const apiMiddleware: Middleware =
         dispatch(getRequestPending());
 
         const { data } = type.startsWith("GET")
-          ? await axiosGetRequest({ url: dataPath })
-          : await axiosPostRequest({ ...payload, url: dataPath });
+          ? await axiosGetRequest({ url: dataUrl })
+          : await axiosPostRequest({ ...payload, url: dataUrl });
 
         switch (type) {
           case getRequest.type:
@@ -66,17 +61,14 @@ const apiMiddleware: Middleware =
             break;
         }
       } catch (error) {
-        if (error instanceof AxiosError) {
-          dispatch(getRequestFail());
-          dispatch(
-            fireNotification({
-              type: "error",
-              message: `${error.status} ${error.code}: Something went wrong!`,
-            })
-          );
-        } else {
-          throw error;
-        }
+        const { status, code } = error as AxiosError;
+        dispatch(getRequestFail());
+        dispatch(
+          fireNotification({
+            type: "error",
+            message: `${status} ${code}: Something went wrong!`,
+          })
+        );
       }
     }
   };
