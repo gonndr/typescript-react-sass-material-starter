@@ -1,15 +1,9 @@
 import { AnyAction } from "@reduxjs/toolkit";
-import { AllData, OptionData } from "@utils/types";
+import { AllData } from "@utils/types";
 
 import { NotificationBody } from "./types";
-import {
-  fireNotification,
-  getRequestFail,
-  getRequestPending,
-  getSuccess,
-  postSuccess,
-  selectOption,
-} from "./actions";
+import { fireNotification, selectOption } from "./actions";
+import { getDataRequest } from "./api/actions";
 
 export type RootState = {
   selectedOption: string;
@@ -44,30 +38,30 @@ export default (
         ...state,
         notification: payload,
       };
-    case getSuccess.type:
+    case getDataRequest.fulfilled.type:
       return {
         ...state,
         isLoading: false,
         isError: false,
         allData: payload,
       };
-    case getRequestPending.type:
+    case getDataRequest.pending.type:
       return {
         ...state,
         isLoading: true,
       };
-    case getRequestFail.type:
+    case getDataRequest.rejected.type:
       return {
         ...state,
         isLoading: false,
         isError: true,
       };
-    case postSuccess.type:
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-      };
+    // case postSuccess.type:
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     isError: false,
+    //   };
     default:
       return state;
   }

@@ -2,20 +2,21 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { RootState } from "@state/reducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getRequest } from "@state/actions";
 import { Alert, Backdrop, CircularProgress } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import TitleBar from "./TitleBar/TitleBar";
 import SideBar from "./SideBar/SideBar";
+import { getDataRequest } from "@state/api/actions";
+import { useAppDispatch } from "@state/store";
 
 const PermanentDrawer = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isLoading, isError } = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    dispatch(getRequest());
+    dispatch(getDataRequest());
   }, []);
 
   const renderLoadingOverlay = () => (

@@ -5,10 +5,10 @@ export type NotificationBody = {
   type?: AlertColor;
   message: string;
 };
-export type GetRequestPayload = {
+export type GetRequestConfig = {
   url: string;
 };
-export type PostRequestPayload = {
+export type PostRequestConfig = {
   url: string;
   data: PostBody;
 };

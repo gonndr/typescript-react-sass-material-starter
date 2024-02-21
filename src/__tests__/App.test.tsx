@@ -53,5 +53,8 @@ describe("App: default", () => {
     it("displays common elements", () => {
       expect(screen.getByText(displayText));
     });
+    it(`displays ${isSuccess ? "success" : "error"} notification`, () => {
+      expect(screen.getByText(displayText));
+    });
   });
 });
