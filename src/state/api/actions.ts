@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "./api";
 import { AllData } from "@utils/types";
 
-const baseURL = "http://localhost:5000";
+const baseURL = "http://localhost:8080";
 const dataUrl = `${baseURL}/data`;
 
 export const getDataRequest = createAsyncThunk("GET_REQUEST", async () => {

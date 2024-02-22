@@ -12,8 +12,18 @@ import router from "./router";
 const rootElement = document.getElementById("app");
 const root = ReactDOM.createRoot(rootElement!);
 
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+const enableMocks = async () => {
+  if (process.env.NODE_ENV !== "development") {
+    return;
+  }
+  const { serviceWorker } = await import("../mocks/browser");
+  return serviceWorker.start();
+};
+
+enableMocks().then(() =>
+  root.render(
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  )
 );

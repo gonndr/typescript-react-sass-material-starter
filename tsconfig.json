@@ -17,7 +17,8 @@
       "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
       "@state/*": ["src/state/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@tests/*": ["src/__tests__/*"]
     },
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },

@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const { resolveTsAliases } = require("resolve-ts-aliases");
+const path = require("path");
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -87,6 +88,9 @@ if (isProd) {
     devMiddleware: {
       publicPath: "/",
       stats: "errors-only",
+    },
+    static: {
+      directory: path.resolve(__dirname, "dist"),
     },
   };
 }
