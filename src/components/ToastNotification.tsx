@@ -1,15 +1,13 @@
 import { Snackbar, Alert } from "@mui/material";
 import { fireNotification } from "@state/actions";
-import { RootState } from "@state/reducer";
+import { selectNotification } from "@state/selectors";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const ToastNotification = (): JSX.Element => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const {
-    notification: { type, message },
-  } = useSelector((state: RootState) => state);
+  const { type, message } = useSelector(selectNotification);
 
   useEffect(() => {
     message && setIsOpen(true);

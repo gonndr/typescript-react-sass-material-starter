@@ -7,11 +7,12 @@ import { selectOption } from "@state/actions";
 import { sortList } from "@utils/helpers";
 import SideBarListItem from "./SideBarListItem";
 import { drawerWidth } from "../muiStylingConfig";
+import { selectAllData, selectSelectedOption } from "@state/selectors";
 
 const SideBar = (): JSX.Element => {
   const dispatch = useDispatch();
-  const { selectedOption, allData } = useSelector((state: RootState) => state);
-
+  const selectedOption = useSelector(selectSelectedOption);
+  const allData = useSelector(selectAllData);
   const options = allData.map(({ name }) => name);
 
   return (

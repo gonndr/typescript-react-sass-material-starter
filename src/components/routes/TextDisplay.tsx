@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { selectOption } from "@state/actions";
-import { RootState } from "@state/reducer";
+import { selectAllData, selectSelectedOption } from "@state/selectors";
 import { getOptionByName } from "@utils/helpers";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,8 @@ import { useParams } from "react-router-dom";
 const TextDisplay = (): JSX.Element => {
   const dispatch = useDispatch();
   const { optionPath } = useParams();
-  const { selectedOption, allData } = useSelector((state: RootState) => state);
+  const selectedOption = useSelector(selectSelectedOption);
+  const allData = useSelector(selectAllData);
 
   const displayData = getOptionByName({
     allData,

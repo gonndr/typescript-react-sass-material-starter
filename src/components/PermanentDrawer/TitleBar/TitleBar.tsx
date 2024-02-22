@@ -1,11 +1,11 @@
 import React from "react";
 import { AppBar, Stack, Toolbar, Typography } from "@mui/material";
-import { RootState } from "@state/reducer";
 import { useSelector } from "react-redux";
 import { drawerWidth } from "../muiStylingConfig";
+import { selectSelectedOption } from "@state/selectors";
 
 const TitleBar = (): JSX.Element => {
-  const { selectedOption } = useSelector((state: RootState) => state);
+  const selectedOption = useSelector(selectSelectedOption);
 
   return (
     <AppBar

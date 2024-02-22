@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import { RootState } from "@state/reducer";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Alert, Backdrop, CircularProgress } from "@mui/material";
@@ -10,10 +9,11 @@ import TitleBar from "./TitleBar/TitleBar";
 import SideBar from "./SideBar/SideBar";
 import { getDataRequest } from "@state/api/actions";
 import { useAppDispatch } from "@state/store";
+import { selectApiState } from "@state/selectors";
 
 const PermanentDrawer = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { isLoading, isError } = useSelector((state: RootState) => state);
+  const { isLoading, isError } = useSelector(selectApiState);
 
   useEffect(() => {
     dispatch(getDataRequest());
